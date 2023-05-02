@@ -27,11 +27,11 @@ function GET_TEAM_ID () {
       if [[ $INSERT_TEAM_RESULT == "INSERT 0 1" ]]
       then
         echo Inserted into teams, $TEAM > /dev/tty
+
+        # get new team id
+        TEAM_ID=$($PSQL "SELECT team_id FROM teams WHERE name = '$TEAM'")
       fi
     fi
-
-    # get new team id
-    TEAM_ID=$($PSQL "SELECT team_id FROM teams WHERE name = '$TEAM'")
 
     echo $TEAM_ID
 }
